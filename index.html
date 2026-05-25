@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -340,8 +341,6 @@
 
 </div>
 
-<!-- Modal Config -->
-
 <div class="modal" id="configModal">
 
   <div class="modal-content">
@@ -358,20 +357,11 @@
     </div>
 
     <div class="field">
-      <label>Nome do Agente</label>
+      <label>Agent ID</label>
 
       <input
-        id="agent"
-        value="ai-foundry-senai"
-      />
-    </div>
-
-    <div class="field">
-      <label>Versão</label>
-
-      <input
-        id="version"
-        value="3"
+        id="agentId"
+        value="foundry-senai-0512:1"
       />
     </div>
 
@@ -408,14 +398,12 @@
   let config = {
     endpoint: localStorage.getItem("endpoint") || "__AZURE_ENDPOINT__",
     apiKey: localStorage.getItem("apiKey") || "__AZURE_API_KEY__",
-    agent: localStorage.getItem("agent") || "ai-foundry-senai",
-    version: localStorage.getItem("version") || "3"
+    agentId: localStorage.getItem("agentId") || "foundry-senai-0512:1"
   };
 
   document.getElementById("endpoint").value = config.endpoint;
   document.getElementById("apiKey").value = config.apiKey;
-  document.getElementById("agent").value = config.agent;
-  document.getElementById("version").value = config.version;
+  document.getElementById("agentId").value = config.agentId;
 
   function openConfig(){
     document.getElementById("configModal").style.display = "flex";
@@ -429,13 +417,11 @@
 
     config.endpoint = document.getElementById("endpoint").value;
     config.apiKey = document.getElementById("apiKey").value;
-    config.agent = document.getElementById("agent").value;
-    config.version = document.getElementById("version").value;
+    config.agentId = document.getElementById("agentId").value;
 
     localStorage.setItem("endpoint", config.endpoint);
     localStorage.setItem("apiKey", config.apiKey);
-    localStorage.setItem("agent", config.agent);
-    localStorage.setItem("version", config.version);
+    localStorage.setItem("agentId", config.agentId);
 
     alert("Configuração salva!");
     closeConfig();
@@ -498,8 +484,7 @@
             extra_body:{
               agent_reference:{
                 type:"agent_reference",
-                name:config.agent,
-                version:config.version
+                id:config.agentId
               }
             }
 
@@ -554,3 +539,4 @@
 
 </body>
 </html>
+```

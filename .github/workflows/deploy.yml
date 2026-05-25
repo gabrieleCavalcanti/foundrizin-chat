@@ -2,7 +2,8 @@ name: Deploy Foundrizin para GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: write
@@ -10,15 +11,16 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
 
+    steps:
       - name: Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Injetar credenciais no index.html
+      - name: Injetar credenciais e Agent ID
         run: |
           sed -i "s|__AZURE_ENDPOINT__|${{ secrets.ENDPOINT }}|g" index.html
           sed -i "s|__AZURE_API_KEY__|${{ secrets.API_KEY }}|g" index.html
+          sed -i "s|__AGENT_ID__|foundry-senai-0512:1|g" index.html
 
       - name: Deploy para GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
